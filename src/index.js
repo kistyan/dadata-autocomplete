@@ -9,11 +9,12 @@ export default function DaDataAutocomplete({
     type='address',
     label='Адрес',
     initialQuery='',
+    value,
     onChange=(event, newValue) => {console.log(newValue);},
     inputProps
 }) {
     const [suggestions, setSuggestions] = useState([]);
-    const [inputValue, setInputValue] = useState(initialQuery);
+    const [inputValue, setInputValue] = useState(value ? value.value : initialQuery);
 
     const updateSuggestions = (newInputValue) => {
         if (newInputValue) {
