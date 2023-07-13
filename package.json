@@ -2,27 +2,26 @@
     "name": "dadata-autocomplete",
     "version": "1.0.0",
     "description": "React component for DaData Autocomplete",
-    "main": "src/index.js",
+    "main": "dist/index.js",
     "scripts": {
-        "build": "webpack"
+        "build": "babel src -d dist --verbose"
     },
     "dependencies": {
-        "@emotion/react": "^11.11.1",
-        "@emotion/styled": "^11.11.0",
-        "@mui/material": "^5.14.0",
-        "axios": "^0.24.0",
-        "react": "^17.0.2",
-        "react-dom": "^17.0.2",
-        "react-scripts": "4.0.3"
+        "axios": "^0.24.0"
     },
     "devDependencies": {
+        "@babel/cli": "^7.22.9",
         "@babel/core": "^7.22.9",
         "@babel/preset-env": "^7.22.9",
         "@babel/preset-react": "^7.22.5",
-        "babel-loader": "^8.3.0",
-        "webpack": "^5.88.1",
-        "webpack-cli": "^4.10.0",
-        "webpack-dev-server": "^4.5.0"
+        "babel-loader": "^8.3.0"
+    },
+    "peerDependencies": {
+        "@emotion/react": "^11.11.1",
+        "@emotion/styled": "^11.11.0",
+        "@mui/material": "^5.14.0",
+        "react": ">18.2.0",
+        "react-dom": ">18.2.0"
     },
     "keywords": [
         "autocomplete",
