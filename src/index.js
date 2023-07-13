@@ -3,9 +3,9 @@ import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 import axios from 'axios';
 
-const DADATA_TOKEN = 'b64560af54b95583ac2711f8ecb9744514f08b11';
 
 export default function DaDataAutocomplete({
+    token='b64560af54b95583ac2711f8ecb9744514f08b11';
     type='address',
     label='Адрес',
     initialQuery='',
@@ -26,7 +26,7 @@ export default function DaDataAutocomplete({
                 {
                     headers: {
                         'Content-Type': 'application/json',
-                        'Authorization': 'Token ' + DADATA_TOKEN
+                        'Authorization': 'Token ' + token
                     }
                 }
             ).then(
