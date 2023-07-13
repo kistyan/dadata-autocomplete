@@ -1,0 +1,37 @@
+{
+    "name": "dadata-autocomplete",
+    "version": "1.0.0",
+    "description": "React component for DaData Autocomplete",
+    "main": "dist/bundle.js",
+    "scripts": {
+        "build": "webpack"
+    },
+    "dependencies": {
+        "@mui/material": "^5.0.6",
+        "axios": "^0.24.0",
+        "react": "^17.0.2",
+        "react-dom": "^17.0.2",
+        "react-scripts": "4.0.3"
+    },
+    "devDependencies": {
+        "@babel/core": "^7.22.9",
+        "@babel/preset-env": "^7.22.9",
+        "@babel/preset-react": "^7.22.5",
+        "babel-loader": "^8.3.0",
+        "webpack": "^5.88.1",
+        "webpack-cli": "^4.10.0",
+        "webpack-dev-server": "^4.5.0"
+    },
+    "keywords": [
+        "autocomplete",
+        "dadata"
+    ],
+    "author": {
+        "name": "kistyan",
+        "email": "kistyan12@gmail.com"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/kistyan/dadata-autocomplete.git"
+    }
+}
