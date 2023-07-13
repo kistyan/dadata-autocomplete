@@ -5,7 +5,7 @@ import axios from 'axios';
 
 
 export default function DaDataAutocomplete({
-    token='b64560af54b95583ac2711f8ecb9744514f08b11';
+    token='b64560af54b95583ac2711f8ecb9744514f08b11',
     type='address',
     label='Адрес',
     initialQuery='',
