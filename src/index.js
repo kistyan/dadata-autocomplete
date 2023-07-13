@@ -67,6 +67,7 @@ export default function DaDataAutocomplete({
             onFocus={handleFocus}
             onChange={handleChange}
             inputValue={inputValue}
+            value={value}
             {...inputProps}
             renderInput={(params) => <TextField {...params} label={label} />}
             renderOption={(props, option, {inputValue}) => {
