@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 import axios from 'axios';
-
+import { useDebouncedCallback } from "use-debounce";
 
 export default function DaDataAutocomplete({
     token='b64560af54b95583ac2711f8ecb9744514f08b11',
@@ -11,6 +11,7 @@ export default function DaDataAutocomplete({
     initialQuery='',
     value,
     onChange=(event, newValue) => {console.log(newValue);},
+    requestDelay=500,
     inputProps
 }) {
     const [suggestions, setSuggestions] = useState([]);
@@ -49,9 +50,10 @@ export default function DaDataAutocomplete({
     }
 
     const handleInputChange = (event, newInputValue) => {
-        setInputValue(newInputValue);
         updateSuggestions(newInputValue);
     }
+
+    const debouncedHandleInputChange = useDebouncedCallback(handleInputChange, requestDelay);
 
     const handleChange = (event, newValue) => {
         onChange(event, newValue);
@@ -63,7 +65,10 @@ export default function DaDataAutocomplete({
             filterOptions={(x) => x}
             options={suggestions}
             getOptionLabel={(option) => option.value}
-            onInputChange={handleInputChange}
+            onInputChange={(event, newInputValue) => {
+                setInputValue(newInputValue);
+                debouncedHandleInputChange(event, newInputValue);
+            }}
             onFocus={handleFocus}
             onChange={handleChange}
             inputValue={inputValue}

@@ -9,6 +9,7 @@ var _react = _interopRequireWildcard(require("react"));
 var _TextField = _interopRequireDefault(require("@mui/material/TextField"));
 var _Autocomplete = _interopRequireDefault(require("@mui/material/Autocomplete"));
 var _axios = _interopRequireDefault(require("axios"));
+var _useDebounce = require("use-debounce");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { "default": obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj["default"] = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
@@ -33,6 +34,8 @@ function DaDataAutocomplete(_ref) {
     onChange = _ref$onChange === void 0 ? function (event, newValue) {
       console.log(newValue);
     } : _ref$onChange,
+    _ref$requestDelay = _ref.requestDelay,
+    requestDelay = _ref$requestDelay === void 0 ? 500 : _ref$requestDelay,
     inputProps = _ref.inputProps;
   var _useState = (0, _react.useState)([]),
     _useState2 = _slicedToArray(_useState, 2),
@@ -64,9 +67,9 @@ function DaDataAutocomplete(_ref) {
     updateSuggestions(event.target.value);
   };
   var handleInputChange = function handleInputChange(event, newInputValue) {
-    setInputValue(newInputValue);
     updateSuggestions(newInputValue);
   };
+  var debouncedHandleInputChange = (0, _useDebounce.useDebouncedCallback)(handleInputChange, requestDelay);
   var handleChange = function handleChange(event, newValue) {
     onChange(event, newValue);
   };
@@ -79,7 +82,10 @@ function DaDataAutocomplete(_ref) {
     getOptionLabel: function getOptionLabel(option) {
       return option.value;
     },
-    onInputChange: handleInputChange,
+    onInputChange: function onInputChange(event, newInputValue) {
+      setInputValue(newInputValue);
+      debouncedHandleInputChange(event, newInputValue);
+    },
     onFocus: handleFocus,
     onChange: handleChange,
     inputValue: inputValue,
